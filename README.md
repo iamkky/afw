@@ -1,4 +1,4 @@
-AFW - A simple javascript framework to support teaching basic programming to small kids.
+AFW - A simple javascript framework to help teaching basic programming to small kids.
 
 The idea is to hide the details of HTML and specifics of javascript running on browser to focus on basic programmig.
 
