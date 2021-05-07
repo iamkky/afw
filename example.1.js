@@ -3,15 +3,14 @@ var y;
 var dx;
 var dy;
 var frames;
-var animates;
 
 function setup()
 {
-	x = canvas.width/2;
-	y = canvas.height/2;
+	x = afw.getWidth()/2;
+	y = afw.getHeight()/2;
 	
-	dx = 3;
-	dy = 3;
+	dx = 1;
+	dy = 1;
 
 	frames = 0;
 	animates = 0;
@@ -19,24 +18,21 @@ function setup()
 
 function redraw()
 {
-	afwFillCircle(x,y,40);
+	afw.fillCircle(x,y,40);
 
 	frames++;
-	afwPrint(10,30,"Frames: " + frames);
-	afwPrint(300,30,"Animates: " + animates);
+	afw.print(10,30,"Frames: " + frames);
 }
 
-function animate()
+function animate(dt, time)
 {
-	animates++;
-
-	if(x>canvas.width-40) dx = -dx;
-	if(x<40) dx = 3;
+	if(x>afw.canvas.width-40) dx = -dx;
+	if(x<40) dx = 1;
 
 	x = x + dx;
 	
-	if(y>canvas.height-40) dy = -dy;
-	if(y<40) dy = 3;
+	if(y>afw.canvas.height-40) dy = -dy;
+	if(y<40) dy = 1;
 
 	y = y + dy;
 }

@@ -1,14 +1,85 @@
-
-var canvas;
-var context;
-var afwTick;
-var afwKeyDown = [];
-var afwImagesToLoad;
 // Version 2.0
 // Using requestAnimationFrame
 
-var afwState;
-var afwAnimatePerSecond;
+const afw = {
+	ticks: 0,
+	timeReal: 0,
+	timeStart: -1,
+	timeFromStart: 0,
+	time: 0,
+	imagesToLoad: 0,
+	state: 0,
+	animatePerSecond: 600,
+	animateDt: 1000/600,
+	canvas: null,
+	context: null,
+	loadImage(src)
+	{
+		var downloadingImage;
+
+		if(afw.state != 1) return;
+		downloadingImage = new Image();
+		downloadingImage.onload = function (){ afw.imagesToLoad--;	};
+		afw.imagesToLoad++;
+		downloadingImage.src = src;
+	
+		return downloadingImage;
+	},
+	getWidth()
+	{
+		return this.canvas.width;
+	},
+	getHeight()
+	{
+		return this.canvas.height;
+	},
+	fillCircle(x, y, radius)
+	{
+		this.context.beginPath();
+		//afw.context.moveTo(x, y);
+		this.context.arc(x, y, radius, 0, 2 * Math.PI);
+		this.context.fill();
+	},
+	fillRect(x, y, width, height)
+	{
+		this.context.beginPath();
+		this.context.fillRect(x, y, width, height);
+	},
+	line(x1,y1,x2,y2)
+	{
+		this.context.beginPath();
+		this.context.moveTo(x1,y1);
+		this.context.lineTo(x2,y2);
+		this.context.stroke();
+	},
+	drawImage(img,x,y)
+	{
+		this.context.drawImage(img,x,y);
+	},
+	setStrokeColor(color)
+	{
+		this.context.strokeStyle = color;	
+	},
+	setFillColor(color)
+	{
+		this.context.fillStyle = color;
+	},
+	setColor(color)
+	{
+		afwStrokeColor(color);
+		afwFillColor(color);
+	},
+	setfont(font)
+	{
+		this.context.font = font;
+	},
+	print(x,y,text)
+	{
+		this.context.fillText(text, x, y); 
+	}	
+};
+
+var afwKeyDown = [];
 
 // Stub functions
 function animate()
@@ -19,54 +90,40 @@ function setup()
 {
 }
 
-//Just to remember how to print msg :-)	  
-//console.log(afwKeyDown.length);	  
-
-function afw_timetick()
+ function afw_timetick(timestamp)
 {
-	if(afwImagesToLoad>0) return;
+	afw.timeReal = timestamp;
 
-	for(var i=0; i<afwAnimatePerSecond; i = i + 60){
-		animate();
-		afwTick++;
+	if(afw.imagesToLoad>0) return;
+
+	if(afw.timeStart<0) afw.timeStart = timestamp;
+	afw.timeFromStart = timestamp - afw.timeStart;
+
+	//for(var i=0; i<afw.animatePerSecond; i = i + 60){
+	while(afw.time < afw.timeFromStart){
+		animate(afw.animateDt, afw.time);
+		afw.ticks++;
+		afw.time += afw.animateDt;
 	}
 		
-	context.clearRect(0, 0, canvas.width, canvas.height);
+	afw.context.clearRect(0, 0, afw.canvas.width, afw.canvas.height);
 	redraw();
 	
 	window.requestAnimationFrame(afw_timetick);
 }
 		
-function afw_setup()
+function afw_setup(canvasName)
 {
-	afwTick = 0;
-	imagesToLoad = 0;
-	afwState = 0;
-	
-	canvas = document.getElementById('scr1');
-	context = canvas.getContext('2d');
-	context.font = "30px Arial";
-	canvas.addEventListener('keydown', afw_keydown);
-	canvas.addEventListener('keyup', afw_keyup);
-	afwState = 1;
-	afwAnimatePerSecond = 600;
+	afw.canvas = document.getElementById(canvasName);
+	afw.context = afw.canvas.getContext('2d');
+	afw.context.font = "30px Arial";
+	afw.canvas.addEventListener('keydown', afw_keydown);
+	afw.canvas.addEventListener('keyup', afw_keyup);
+	afw.state = 1;
 	setup();
-	afwState = 2;
+	afw.state = 2;
 	window.requestAnimationFrame(afw_timetick);
 }	
-
-function afwLoadImage(src)
-{
-	var downloadingImage;
-
-	if(afwState != 1) return;
-	downloadingImage = new Image();
-	downloadingImage.onload = function (){ afwImagesToLoad--;	};
-	afwImagesToLoad++;
-	downloadingImage.src = src;
-	
-	return downloadingImage;
-}
 
 function afw_keydown(e)
 {
@@ -78,58 +135,5 @@ function afw_keyup(e)
 	afwKeyDown[e.key] = false;
 }	
 	
-function afwFillCircle(x, y, radius)
-{
-	context.beginPath();
-	//context.moveTo(x, y);
-	context.arc(x, y, radius, 0, 2 * Math.PI);
-	context.fill();
-}
-		
-function afwFillRect(x, y, width, height)
-{
-	context.beginPath();
-	//context.moveTo(x, y);
-	context.fillRect(x, y, width, height);
-}
-
-function afwLine(x1,y1,x2,y2)
-{
-	context.beginPath();
-	context.moveTo(x1,y1);
-	context.lineTo(x2,y2);
-	context.stroke();
-}
-
-function afwDrawImage(img,x,y)
-{
-	context.drawImage(img,x,y);
-}
-
-function afwStrokeColor(color)
-{
-	context.strokeStyle = color;	
-}
-
-function afwFillColor(color)
-{
-	context.fillStyle = color;
-}
-
-function afwColor(color)
-{
-	afwStrokeColor(color);
-	afwFillColor(color);
-}
-
-function afwFont(font)
-{
-	context.font = font;
-}
-
-function afwPrint(x,y,text)
-{
-	context.fillText(text, x, y); 
-}
 
 
