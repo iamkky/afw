@@ -61,4 +61,37 @@ It's a support material for parent to teach the kid, having a nice and fun time 
 
 So... have fun.
 
+Examples
+========
+
+[Example Series A](https://github.com/iamkky/afw/blob/main/example_a/README.md)
+
+ * [Example A0](https://iamkky.github.io/afw/example_a/a0)
+ * [Example A1](https://iamkky.github.io/afw/example_a/a1)
+ * [Example A2](https://iamkky.github.io/afw/example_a/a2)
+ * [Example A3](https://iamkky.github.io/afw/example_a/a3)
+ * [Example A4](https://iamkky.github.io/afw/example_a/a4)
+ * [Example A5](https://iamkky.github.io/afw/example_a/a5)
+ 
+[Example Series B](https://github.com/iamkky/afw/blob/main/example_b/README.md)
+
+ * [Example B0](https://iamkky.github.io/afw/example_b/b0)
+ * [Example B1](https://iamkky.github.io/afw/example_b/b1)
+ * [Example B2](https://iamkky.github.io/afw/example_b/b2)
+ * [Example B3](https://iamkky.github.io/afw/example_b/a3)
+
+[Example Series C](https://github.com/iamkky/afw/blob/main/example_c/README.md)
+
+ * [Example C0](https://iamkky.github.io/afw/example_c/c0)
+ * [Example C1](https://iamkky.github.io/afw/example_c/c1)
+ * [Example C2](https://iamkky.github.io/afw/example_c/c2)
+ 
+[Example Series D](https://github.com/iamkky/afw/blob/main/example_d/README.md)
+
+ * [Example D0](https://iamkky.github.io/afw/example_d/d0)
+ * [Example D1](https://iamkky.github.io/afw/example_d/d1)
+ * [Example D2](https://iamkky.github.io/afw/example_d/d2)
+ 
+
+
 
