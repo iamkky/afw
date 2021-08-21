@@ -61,8 +61,20 @@ It's a support material for parent to teach the kid, having a nice and fun time 
 
 So... have fun.
 
-Examples
-========
+Examples for a Guided Tutorial
+==============================
+
+There is a set of examples to help in the start.
+A basic support material for parent to teach the kids, having a nice and fun time together, and learning programming as a collateral.
+
+Those examples are not intended as a course and should not be used as this.
+It's just a road map suggestion for the parent to follow in their own way to teach the kids.
+
+Those examples presents what is possible to do with javascript/afw and gives some inspiration.
+They are organized in series. Each series presents an evolutionary solution that is used to introduce a few concepts.
+
+The best way to go is for parent to check out the examples first, capture the intentions and try to achieve same the results together with the kids as a team, urging the kids to think a little bit each step, following the examples or/and improvising.
+
 
 [Example Series A](https://github.com/iamkky/afw/blob/main/example_a/README.md)
 
