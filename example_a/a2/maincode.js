@@ -15,7 +15,7 @@ function setup()
 function redraw()
 {
 	// A centralized box
-	afw.fillRectangle(center_x - 15, center_y - 15)/2,30,30);
+	afw.fillRectangle(center_x - 15, center_y - 15,30,30);
 	afw.fillCircle(center_x+200,center_y+200,20);
 }
 
