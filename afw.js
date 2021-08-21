@@ -13,6 +13,7 @@ const afw = {
 	animateDt: 1000/600,
 	canvas: null,
 	context: null,
+	keyDown: {},
 	loadImage(src)
 	{
 		var downloadingImage;
@@ -40,7 +41,7 @@ const afw = {
 		this.context.arc(x, y, radius, 0, 2 * Math.PI);
 		this.context.fill();
 	},
-	fillRect(x, y, width, height)
+	fillRectangle(x, y, width, height)
 	{
 		this.context.beginPath();
 		this.context.fillRect(x, y, width, height);
@@ -76,7 +77,11 @@ const afw = {
 	print(x,y,text)
 	{
 		this.context.fillText(text, x, y); 
-	}	
+	},
+	translate(x,y)
+	{
+		this.context.translate(x,y);
+	}
 };
 
 var afwKeyDown = [];
@@ -99,13 +104,13 @@ function setup()
 	if(afw.timeStart<0) afw.timeStart = timestamp;
 	afw.timeFromStart = timestamp - afw.timeStart;
 
-	//for(var i=0; i<afw.animatePerSecond; i = i + 60){
 	while(afw.time < afw.timeFromStart){
 		animate(afw.animateDt, afw.time);
 		afw.ticks++;
 		afw.time += afw.animateDt;
 	}
-		
+
+	afw.context.resetTransform();	
 	afw.context.clearRect(0, 0, afw.canvas.width, afw.canvas.height);
 	redraw();
 	
@@ -115,6 +120,7 @@ function setup()
 function afw_setup(canvasName)
 {
 	afw.canvas = document.getElementById(canvasName);
+	afw.canvas.focus();
 	afw.context = afw.canvas.getContext('2d');
 	afw.context.font = "30px Arial";
 	afw.canvas.addEventListener('keydown', afw_keydown);
@@ -127,12 +133,12 @@ function afw_setup(canvasName)
 
 function afw_keydown(e)
 {
-	afwKeyDown[e.key] = true;
+	afw.keyDown[e.code] = true;
 }
 	
 function afw_keyup(e)
 {
-	afwKeyDown[e.key] = false;
+	afw.keyDown[e.code] = false;
 }	
 	
 
